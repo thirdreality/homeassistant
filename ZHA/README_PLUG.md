@@ -1,7 +1,7 @@
 # Instructions on ThirdReality Smart Plug Private Cluster in Home Assistant ZHA
 
 ## 1.Configuration in ZHA
-1）Create a folder in the /config directory (the name is defined by yourself, the name of the folder in the example Chinese is "thirdreality_quirks") in the example, which is used to store the local code files.
+1）Create a folder in the /config directory (the name is defined by yourself, the name of the folder in the example is "thirdreality_quirks") in the example, which is used to store the local code files.
 
 2）Use the Samba Share tool to place plug.py files into the folder you just created.
 
