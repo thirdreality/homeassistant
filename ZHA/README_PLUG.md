@@ -39,7 +39,7 @@ a. Restart Home Assistant to apply the configuration changes.
 
 6)Compare the "Cumulative Power" display before and after sending the reset command. The screenshots provided (image, image) illustrate the difference.
 
-![image](https://github.com/hwzolin/thirdThreadZHA/assets/42085859/a3fe7e31-61ab-4385-b614-406392124583)
+![329763810-57c430a7-91fa-4a2e-9384-7fe44dfe2c8d](https://github.com/thirdreality/homeassistant/assets/99949392/99372d11-9ee8-47d6-b07f-bdb992b2e440)
 
 ![image](https://github.com/hwzolin/thirdThreadZHA/assets/42085859/0273af27-856c-44ac-b0a3-c8cab07d050e)
 
