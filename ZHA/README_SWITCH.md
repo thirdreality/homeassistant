@@ -34,6 +34,8 @@
 
 <img title="" src="assets/switch/6.png" alt="">
 
+If the button is pressed again after pressing it, it will be considered as canceling this function (this time)
+
 3.Access Smart Plug scripts on GitHub
 URL：https://github.com/thirdreality
 
