@@ -1,23 +1,43 @@
 # Instructions on ThirdReality Motion Sensor Private Cluster in Home Assistant ZHA
 
 #
-## 1.ZHA Configuration
+## 1.ZHA Configuration And How To Add The Script 
 
-1）Create a Folder for Local Code Files:
-a. Navigate to the /config directory.
-b. Create a new folder with a name(e.g., thirdreality_quirks). This folder will store the local code files.
+1）Install the Samba Sahre add-on in Home Assistant
 
-2）Place the motion.py File:
-a. Use the Samba share tool to transfer the motion.py file into the newly created folder.
+![config_configuration](assets/motion/14.png)
 
-3）Edit the configuration.yaml File(as shown in the boxed area):
 
-![config_configuration](assets/motion/1.png)
+![config_configuration](assets/motion/15.png)
 
-4）Restart Home Assistant:
+
+![config_configuration](assets/motion/17.png)
+
+#If you cannot find the plugin, please open the advanced settings below
+
+![config_configuration](assets/motion/18.png)
+
+
+![config_configuration](assets/motion/16.png)
+
+
+2）Open the folder and enter the IP address of the Home assistant. You need to enter your account and password
+
+![config_configuration](assets/motion/19.png)
+
+3）Afterwards, enter the config file and create a new file to store the script. (My script is stored in zha_quirks)
+
+![config_configuration](assets/motion/20.png)
+![config_configuration](assets/motion/23.png)
+
+4）Enter configuration.yaml, add these two lines, and the path will be the location where you store the plug script, as shown in the above figure
+
+![config_configuration](assets/motion/22.png)
+
+
 a. Restart Home Assistant to apply the configuration changes.
 
-## 2.Operating Devices（detected_to_undetected_delay）(The device is reset, and all private property Settings are restored to default values)
+## 2.Operating Devices（detected to undetected delay）(The device is reset, and all private property Settings are restored to default values)
 
 **Note: These instructions describe the operation for a MOTION SENSOR device. Similar methods can be applied to customize other ThirdReaity devices with private clusters.**
 
