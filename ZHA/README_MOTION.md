@@ -1,4 +1,4 @@
-# Instructions on ThirdReality Motion Sensor Private Cluster in Home Assistant ZHA
+# Instructions on ThirdReality Motion Sensor Private Cluster in Home Assistant ZHA（Support zha starting from version 62）
 
 #
 ## 1.ZHA Configuration And How To Add The Script 
