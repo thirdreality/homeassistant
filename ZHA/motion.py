@@ -36,7 +36,7 @@ class ThirdRealityMotionCluster(CustomCluster):
     class AttributeDefs(BaseAttributeDefs):
         """Attribute definitions."""
 
-        detected_to_undetected_delay: Final = ZCLAttributeDef(
+        cool_down_time: Final = ZCLAttributeDef(
             id=0x0001,
             type=ControlMode,
             is_manufacturer_specific=True,
