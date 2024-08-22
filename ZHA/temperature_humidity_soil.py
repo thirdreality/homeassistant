@@ -1,22 +1,19 @@
 """Third Reality Temperature humidity devices."""
-from zigpy.profiles import zha
-from zigpy.quirks import CustomDevice
-import zigpy.types as t
-from zigpy.zcl.clusters.general import Basic, Ota, PowerConfiguration
-from zigpy.zcl.clusters.measurement import TemperatureMeasurement ,RelativeHumidity
-from zigpy.zcl.foundation import BaseAttributeDefs, ZCLAttributeDef
-from zhaquirks import CustomCluster
-
+from typing import Final
+from zigpy.profiles import zha 
+from zigpy.quirks import CustomDevice 
+import zigpy.types as t 
+from zigpy.zcl.clusters.general import Basic, Ota, PowerConfiguration 
+from zigpy.zcl.clusters.measurement import TemperatureMeasurement ,RelativeHumidity 
+from zhaquirks import CustomCluster 
+from zigpy.zcl.foundation import BaseAttributeDefs, ZCLAttributeDef 
 from zigpy.zcl.clusters.general import (
     Basic,
-    Groups,
     Identify,
-    OnOff,
     Ota,
-    Scenes,
 )
 
-from zhaquirks.const import (
+from zhaquirks.const import ( 
     DEVICE_TYPE,
     ENDPOINTS,
     INPUT_CLUSTERS,
@@ -24,20 +21,41 @@ from zhaquirks.const import (
     OUTPUT_CLUSTERS,
     PROFILE_ID,
 )
-from zhaquirks.thirdreality import THIRD_REALITY
+from zhaquirks.thirdreality import THIRD_REALITY 
 
 THIRDREALITY_CLUSTER_ID = 0xFF01
 
+
+class ControlMode(t.int16s):  # noqa: D101
+
+    pass
 
 class ThirdRealityCluster(CustomCluster):
     """ThirdReality Temperature humidity Cluster."""
 
     cluster_id = THIRDREALITY_CLUSTER_ID
-    attributes = {
-       # 0x0030: ("LCD_display_off", t.uint8_t, True),
-        0x0031: ("Temperature_calibration", t.int16s, True),
-        0x0032: ("humidity_calibration", t.int16s, True),
-    }
+
+    class AttributeDefs(BaseAttributeDefs): 
+        """Attribute definitions."""
+
+        Celsius_degree_calibration: Final = ZCLAttributeDef( 
+            id=0x0031,
+            type=ControlMode,
+            is_manufacturer_specific=True,
+        )
+
+        humidity_calibration: Final = ZCLAttributeDef(
+            id=0x0032,
+            type=ControlMode,
+            is_manufacturer_specific=True,
+        )
+
+        Fahrenheit_degree_calibration: Final = ZCLAttributeDef( 
+            id=0x0033,
+            type=ControlMode,
+            is_manufacturer_specific=True,
+        )
+  
 
 
 class Temperature_humidity(CustomDevice):
@@ -99,7 +117,7 @@ class Temperature_humidity_lite(CustomDevice):
                     Basic.cluster_id,
                     PowerConfiguration.cluster_id,
                     Identify.cluster_id,
-                   # PollControl.cluster_id,
+                    #PollControl.cluster_id, # type: ignore
                     TemperatureMeasurement.cluster_id,
                     RelativeHumidity.cluster_id,
                     ThirdRealityCluster.cluster_id,
@@ -119,7 +137,7 @@ class Temperature_humidity_lite(CustomDevice):
                     Basic.cluster_id,
                     PowerConfiguration.cluster_id,
                     Identify.cluster_id,
-                   # PollControl.cluster_id,
+                    #PollControl.cluster_id, # type: ignore
                     TemperatureMeasurement.cluster_id,
                     RelativeHumidity.cluster_id,
                     ThirdRealityCluster,
