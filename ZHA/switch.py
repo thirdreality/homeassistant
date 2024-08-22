@@ -43,8 +43,8 @@ class ThirdRealitySwitchCluster(CustomCluster):
     cluster_id = THIRD_REALITY_SWITCH_CLUSTER_ID
 
     attributes = {
-      0x0002: ("back_off", t.uint64_t, True),
-      0x0001: ("back_on", t.uint64_t, True),
+      0x0002: ("back_off", t.uint16_t, True),
+      0x0001: ("back_on", t.uint16_t, True),
     }
 
 class ThirdRealitySwitchBrightnessCluster(CustomCluster):
