@@ -21,7 +21,7 @@
 ![config_configuration](assets/motion/16.png)
 
 
-2）Open the folder and enter the IP address of the Home assistant. You need to enter your account and password
+2）Open the folder and enter the IP address of the Home assistant. You need to enter your account and password(Account password in Samba share configuration)
 
 ![config_configuration](assets/motion/19.png)
 
