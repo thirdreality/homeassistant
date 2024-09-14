@@ -1,5 +1,4 @@
-# Instructions on ThirdReality Switch Private Cluster in Home Assistant ZHA
-
+# Instructions on ThirdReality Switch Private Cluster in Home Assistant ZHA（Support zha starting from version 29）
 #
 ## 1.ZHA Configuration And How To Add The Script 
 

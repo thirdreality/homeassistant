@@ -1,4 +1,4 @@
-# Instructions on ThirdReality Door Sensor Private Cluster in Home Assistant ZHA
+# Instructions on ThirdReality Door Sensor Private Cluster in Home Assistant ZHA（Support zha starting from version 61）
 
 #
 ## 1.ZHA Configuration And How To Add The Script 

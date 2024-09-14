@@ -11,6 +11,7 @@ from zigpy.zcl.clusters.general import (
     Basic,
     Identify,
     Ota,
+	PollControl,
 )
 
 from zhaquirks.const import ( 
@@ -163,6 +164,7 @@ class Soil_Moisture_Sensor(CustomDevice):
                     Basic.cluster_id,
                     PowerConfiguration.cluster_id,
                     TemperatureMeasurement.cluster_id,
+					PollControl.cluster_id,
                     RelativeHumidity.cluster_id,
                     ThirdRealityCluster.cluster_id,
                 ],
@@ -181,6 +183,7 @@ class Soil_Moisture_Sensor(CustomDevice):
                     Basic.cluster_id,
                     PowerConfiguration.cluster_id,
                     TemperatureMeasurement.cluster_id,
+					PollControl.cluster_id,
                     RelativeHumidity.cluster_id,
                     ThirdRealityCluster,
                 ],

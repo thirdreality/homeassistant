@@ -1,4 +1,4 @@
-# Instructions on ThirdReality Vibration Sensor Private Cluster in Home Assistant ZHA
+# Instructions on ThirdReality Vibration Sensor Private Cluster in Home Assistant ZHA（Support zha starting from version 46）
 
 
 #

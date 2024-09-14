@@ -1,4 +1,4 @@
-# # Instructions on ThirdReality Curtain Private Cluster in Home Assistant ZHA
+# # Instructions on ThirdReality Curtain Private Cluster in Home Assistant ZHA（Support zha starting from version 73）
 
 #
 ## 1.ZHA Configuration And How To Add The Script 
