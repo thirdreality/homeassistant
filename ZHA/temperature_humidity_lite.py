@@ -24,7 +24,7 @@ from zhaquirks.const import (
 )
 from zhaquirks.thirdreality import THIRD_REALITY 
 
-THIRDREALITY_CLUSTER_ID = 0xFC00
+THIRDREALITY_CLUSTER_ID = 0xFF01
 
 class ControlMode(t.int16s):  # noqa: D101
 

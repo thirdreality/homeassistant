@@ -27,9 +27,9 @@ module.exports = [{
         device.save();
     },
 	extend: [
-		deviceAddCustomCluster('THIRD_REALITY_MOTION_DELAY_CLUSTER_ID', {
+		deviceAddCustomCluster('THIRD_calibration_CLUSTER_ID', {
 			ID: 0xff01,
-			manufacturerCode: 0x1233,
+			manufacturerCode: 0x1407,
 			attributes: {
 				Celsius_degree_calibration: {ID: 0x0031, type: 0x29},
 				humidity_calibration: {ID: 0x0032, type: 0x29},
