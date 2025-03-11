@@ -2,7 +2,7 @@
 
 ## Local setting of cooldown time 
 
-1）Place the radar.js File: a. Use the Samba share tool to transfer the radar.js file into the zigbee2mqtt folder.
+1）Place the radar.js File: a. Use the Samba share tool to transfer the radar.js file into a new subfolder called "external_converters" in your zigbee2mqtt folder
 
 ![config_configuration](assets/radar/2.png)
 ![config_configuration](assets/radar/10.png)
