@@ -1,6 +1,6 @@
-# Instructions on radar Sensor Private Cluster in zigbee2mqtt(local setting)
+# Instructions on thirdreality products Private Cluster in zigbee2mqtt(local setting)
 
-## Local setting of cooldown time 
+## Taking radar as an example
 
 1）Place the radar.js File: a. Use the Samba share tool to transfer the radar.js file into a new subfolder called "external_converters" in your zigbee2mqtt folder
 
