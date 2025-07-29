@@ -15,21 +15,11 @@ module.exports = [{
     model: '3RSM0147Z',
     vendor: 'Third Reality',
     description: 'Soil sensor',
-    fromZigbee: [fz.temperature, fz.humidity, fz.soil_moisture, fz.battery],
-    exposes: (device) => {
-        const exps = [];
-        const version = device?.applicationVersion || 0;
-        if (version < 39) {
-            exps.push(e.humidity());
-        } else {
-            exps.push(e.soil_moisture().withDescription('Soil Moisture'));
-        }
-        exps.push(e.temperature());
-        exps.push(e.battery());
-        return exps;
-    },
     ota: true,
     extend: [
+        m.temperature(),
+        m.soilMoisture(),
+        m.battery(),
         m.deviceAddCustomCluster("3rSoilSpecialCluster", {
             ID: 0xff01,
             manufacturerCode: 0x1407,
@@ -42,22 +32,5 @@ module.exports = [{
             commandsResponse: {},
         }),
     ],
-    configure: async (device, coordinatorEndpoint) => {
-        const endpoint = device.getEndpoint(1);
-
-        const version = device?.applicationVersion || 0;
-        if (version < 39) {
-            await reporting.bind(endpoint, coordinatorEndpoint, ['genPowerCfg', 'msTemperatureMeasurement', 'msRelativeHumidity']);
-            await reporting.humidity(endpoint, {min: 10, max: 3600, change: 100});
-        } else {
-            await reporting.bind(endpoint, coordinatorEndpoint, ['genPowerCfg', 'msTemperatureMeasurement', 'msSoilMoisture']);
-            await reporting.soil_moisture(endpoint, {min: 10, max: 3600, change: 100});
-        }
-        await reporting.batteryPercentageRemaining(endpoint);
-        await reporting.temperature(endpoint, {min: 10, max: 3600, change: 100});
-        await endpoint.read("genPowerCfg", ["batteryPercentageRemaining"]);
-        device.powerSource = "Battery";
-        device.save();
-    },
 }, ];
     
