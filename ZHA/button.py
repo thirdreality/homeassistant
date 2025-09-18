@@ -41,6 +41,12 @@ MOVEMENT_TYPE = {
     255: COMMAND_RELEASE,
 }
 
+THIRD_REALITY_CLUSTER_ID = 0xFF01
+
+class ThirdRealitySpecificCluster(CustomCluster):
+    """Manufacturer specific cluster to relay motion event to IAS Zone cluster."""
+
+    cluster_id = THIRD_REALITY_CLUSTER_ID
 
 class MultistateInputCluster(CustomCluster, MultistateInput):
     """Multistate input cluster."""
@@ -75,6 +81,7 @@ class Button(CustomDevice):
                     Basic.cluster_id,
                     MultistateInput.cluster_id,
                     CustomPowerConfigurationCluster.cluster_id,
+                    ThirdRealitySpecificCluster.cluster_id,
                 ],
                 OUTPUT_CLUSTERS: [
                     OnOff.cluster_id,
@@ -93,6 +100,7 @@ class Button(CustomDevice):
                     Basic.cluster_id,
                     CustomPowerConfigurationCluster,
                     MultistateInputCluster,
+                    ThirdRealitySpecificCluster.cluster_id,
                 ],
                 OUTPUT_CLUSTERS: [
                     OnOff.cluster_id,
