@@ -24,18 +24,29 @@ class THIRD_REALITY_Blind_Gen2_CLUSTER(CustomCluster):
         )
         
         compensation_speed: Final = ZCLAttributeDef(
-            id=0x0001,
-            type=t.int8s,
-            is_manufacturer_specific=True,
-        )
-          
+			id=0x0001,
+			type=t.int8s,
+			is_manufacturer_specific=True,
+		)
+
+				
         limit_position: Final = ZCLAttributeDef(
-            id=0x0002,
-            type=t.uint16_t,
-            is_manufacturer_specific=True,
-        )
+			id=0x0002,
+			type=t.uint16_t,
+			is_manufacturer_specific=True,
+		)
 
+        total_cycle_times: Final = ZCLAttributeDef(
+			id=0x0003,
+			type=t.uint16_t,
+			is_manufacturer_specific=True,
+		)
 
+        last_remaining_battery_percentage: Final = ZCLAttributeDef(
+			id=0x0004,
+			type=t.uint8_t,
+			is_manufacturer_specific=True,
+		)
 (
     QuirkBuilder("Third Reality, Inc", "3RSB02015Z")
     .replaces(THIRD_REALITY_Blind_Gen2_CLUSTER, endpoint_id=1)
@@ -58,7 +69,7 @@ class THIRD_REALITY_Blind_Gen2_CLUSTER(CustomCluster):
         #entity_type="number",
         #device_class="duration",
         translation_key="compensation_speed",
-        fallback_name="compensation_speed",
+        fallback_name="Compensation_speed",
     )
     .number(
         attribute_name=THIRD_REALITY_Blind_Gen2_CLUSTER.AttributeDefs.limit_position.name,
@@ -72,7 +83,17 @@ class THIRD_REALITY_Blind_Gen2_CLUSTER(CustomCluster):
         #entity_type="number",
         #device_class="duration",
         translation_key="limit_position",
-        fallback_name="limit_position",
+        fallback_name="Limit_position",
+    )
+	.number(
+        attribute_name=THIRD_REALITY_Blind_Gen2_CLUSTER.AttributeDefs.total_cycle_times.name,
+        cluster_id=THIRD_REALITY_Blind_Gen2_CLUSTER.cluster_id,
+        endpoint_id=1,
+        min_value=200,
+        max_value=334,
+        step=1,
+        translation_key="total_cycle_times",
+        fallback_name="Total_cycle_times",
     )
     .add_to_registry()
 )
