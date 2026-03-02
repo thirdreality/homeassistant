@@ -1,0 +1,40 @@
+# Instructions on ThirdReality Private Cluster in Home Assistant ZHA
+
+#
+## 1.ZHA Configuration And How To Add The Script 
+
+1）Install the Samba Sahre add-on in Home Assistant
+
+![config_configuration](assets/motion/14.png)
+
+
+![config_configuration](assets/motion/15.png)
+
+
+![config_configuration](assets/motion/17.png)
+
+#If you cannot find the samba share, please open the advanced settings below
+
+![config_configuration](assets/motion/18.png)
+
+
+![config_configuration](assets/motion/16.png)
+
+
+2）Open the folder and enter the IP address of the Home assistant. You need to enter your account and password(Account password in Samba share configuration)
+
+![config_configuration](assets/motion/19.png)
+
+3）Afterwards, enter the config file and create a new file to store the script. (My script is stored in zha_quirks)
+
+![config_configuration](assets/motion/20.png)
+![config_configuration](assets/motion/23.png)
+
+4）Enter configuration.yaml, add these two lines, and the path will be the location where you store the plug script, as shown in the above figure
+
+![config_configuration](assets/motion/22.png)
+
+
+a. Restart Home Assistant to apply the configuration changes.
+b. After each script is released, it needs to be reloaded
+
