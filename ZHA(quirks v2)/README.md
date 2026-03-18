@@ -28,7 +28,6 @@
 3）Afterwards, enter the config file and create a new file to store the script. (My script is stored in zha_quirks)
 
 ![config_configuration](assets/motion/20.png)
-![config_configuration](assets/motion/23.png)
 
 4）Enter configuration.yaml, add these two lines, and the path will be the location where you store the plug script, as shown in the above figure
 
