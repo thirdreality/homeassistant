@@ -10,7 +10,7 @@ from zigpy.zcl.foundation import BaseAttributeDefs, ZCLAttributeDef
 class ThirdRealityRadarCluster(CustomCluster):
     """Third Reality's 24G radar private cluster."""
 
-    cluster_id = 0xFF01
+    cluster_id = 0xff01
 
     class AttributeDefs(BaseAttributeDefs):
         """Define the attributes of a private cluster."""
@@ -30,9 +30,10 @@ class ThirdRealityRadarCluster(CustomCluster):
 (
     QuirkBuilder("Third Reality, Inc", "3RPS01083Z")
     .replaces(ThirdRealityRadarCluster)
-    .switch(
-        cluster_id=ThirdRealityRadarCluster.cluster_id,
+    .write_attr_button(
         attribute_name=ThirdRealityRadarCluster.AttributeDefs.sensor_calibration.name,
+        attribute_value=0x01,  # 1 sensor calibration
+        cluster_id=ThirdRealityRadarCluster.cluster_id,
         translation_key="sensor_calibration",
         fallback_name="Sensor calibration",
     )
