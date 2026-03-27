@@ -47,7 +47,7 @@ class ThirdRealityButtonCluster(CustomCluster):
     class AttributeDefs(BaseAttributeDefs):
         """Define the attributes of a private cluster."""
 
-        cancel_double_click: Final = ZCLAttributeDef(
+        disable_double_click: Final = ZCLAttributeDef(
             id=0x0000,
             type=t.uint8_t,
             is_manufacturer_specific=True,
@@ -59,10 +59,10 @@ class ThirdRealityButtonCluster(CustomCluster):
     .replaces(ThirdRealityButtonCluster)
     .replaces(MultistateInputCluster)
     .switch(
-        attribute_name=ThirdRealityButtonCluster.AttributeDefs.cancel_double_click.name,
+        attribute_name=ThirdRealityButtonCluster.AttributeDefs.disable_double_click.name,
         cluster_id=ThirdRealityButtonCluster.cluster_id,
-        translation_key="cancel_double_click",
-        fallback_name="Cancel double click",
+        translation_key="disable_double_click",
+        fallback_name="Disable double click",
     )
     .device_automation_triggers(
         {
