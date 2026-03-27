@@ -21,7 +21,7 @@ class ThirdRealityCurtainCluster(CustomCluster):
             type=t.uint8_t,
             is_manufacturer_specific=True,
         )
-        
+
         allow_bind: Final = ZCLAttributeDef(
             id=0x0020,
             type=t.uint8_t,
@@ -36,16 +36,15 @@ class ThirdRealityCurtainCluster(CustomCluster):
         attribute_name=ThirdRealityCurtainCluster.AttributeDefs.enable_disable_pir_remote.name,
         cluster_id=ThirdRealityCurtainCluster.cluster_id,
         force_inverted=True,
-        translation_key="enable_disable_pir_mode",
-        fallback_name="Enable/Disable PIR Remote",
+        translation_key="enable_pir_mode",
+        fallback_name="Enable PIR remote",
     )
     .write_attr_button(
         attribute_name=ThirdRealityCurtainCluster.AttributeDefs.allow_bind.name,
         attribute_value=0x01,
         cluster_id=ThirdRealityCurtainCluster.cluster_id,
-        translation_key="allow_bind",
-        fallback_name="Allow bind",
-        endpoint_id=1,
+        translation_key="allow_remote_binding",
+        fallback_name="Allow remote binding",
     )
     .add_to_registry()
 )
