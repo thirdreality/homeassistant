@@ -8,19 +8,14 @@ export default {
   ota: true,
   extend: [
     m.battery(),
-    m.pressure(),
-    m.pressure({
-      attribute: { ID: 0xff01, type: 0x23 },
-      name: "Pressure",
-      unit: "Pa",
-      scale: 1,
-    }),
     m.numeric({
-        name: "press diff level",
-        cluster: "genLevelCtrl",
-        attribute: 'currentLevel',
-        description: "press diff level",
-        access: "STATE_GET",
+      name: "dirty_level",
+      unit: "%",
+      cluster: "genAnalogInput",
+      attribute: "presentValue",
+      description: "Measure dirty level",
+      access: "STATE_GET",
     }),
+    m.pressure(),
   ],
 };
