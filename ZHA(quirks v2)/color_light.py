@@ -26,14 +26,14 @@ class ThirdRealityLightCluster(CustomCluster):
 (
     QuirkBuilder("Third Reality, Inc", "3RCB02070Z")
     .applies_to("Third Reality, Inc", "3RCB01057Z")
+    .applies_to("Third Reality, Inc", "3RCB1095Z")
     .replaces(ThirdRealityLightCluster, endpoint_id=1)
     .write_attr_button(
         attribute_name=ThirdRealityLightCluster.AttributeDefs.allow_bind.name,
         attribute_value=0x01,
         cluster_id=ThirdRealityLightCluster.cluster_id,
-        translation_key="allow_bind",
-        fallback_name="Allow bind",
-        endpoint_id=1,
+        translation_key="allow_remote_binding",
+        fallback_name="Allow remote bind",
     )
     .add_to_registry()
 )
