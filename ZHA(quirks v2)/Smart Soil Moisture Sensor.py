@@ -3,11 +3,11 @@
 from typing import Final
 
 from zigpy.quirks import CustomCluster
-from zigpy.quirks.v2 import QuirkBuilder
+from zigpy.quirks.v2 import NumberDeviceClass, QuirkBuilder
+from zigpy.quirks.v2.homeassistant import PERCENTAGE, UnitOfTemperature
 import zigpy.types as t
-from zigpy.zcl.clusters.measurement import SoilMoisture
+from zigpy.zcl.clusters.measurement import SoilMoisture, RelativeHumidity
 from zigpy.zcl.foundation import BaseAttributeDefs, ZCLAttributeDef
-from zigpy.quirks.v2.homeassistant import UnitOfTemperature, UnitOfConductivity, PERCENTAGE
 
 
 class ThirdRealitySoilMoistureCluster(CustomCluster):
@@ -18,19 +18,19 @@ class ThirdRealitySoilMoistureCluster(CustomCluster):
     class AttributeDefs(BaseAttributeDefs):
         """Define the attributes of a private cluster."""
 
-        temperature_correction_fahrenheit: Final = ZCLAttributeDef(
+        temperature_offset_fahrenheit: Final = ZCLAttributeDef(
             id=0x0033,
             type=t.int16s,
             is_manufacturer_specific=True,
         )
 
-        temperature_correction_celsius: Final = ZCLAttributeDef(
+        temperature_offset_celsius: Final = ZCLAttributeDef(
             id=0x0031,
             type=t.int16s,
             is_manufacturer_specific=True,
         )
 
-        humidity_correction: Final = ZCLAttributeDef(
+        humidity_offset: Final = ZCLAttributeDef(
             id=0x0032,
             type=t.int16s,
             is_manufacturer_specific=True,
@@ -41,39 +41,32 @@ class ThirdRealitySoilMoistureCluster(CustomCluster):
     QuirkBuilder("Third Reality, Inc", "3RSM0147Z")
     .applies_to("Third Reality, Inc", "3RSM0347Z")
     .replaces(ThirdRealitySoilMoistureCluster)
-    .replaces(SoilMoisture)
+    .prevent_default_entity_creation(
+        endpoint_id=1,  # 根据你的设备调整endpoint
+        cluster_id=RelativeHumidity.cluster_id,
+        function=lambda entity: entity.__class__.__name__ == "Humidity",
+    )
     .number(
-        attribute_name=ThirdRealitySoilMoistureCluster.AttributeDefs.temperature_correction_celsius.name,
+        attribute_name=ThirdRealitySoilMoistureCluster.AttributeDefs.temperature_offset_celsius.name,
         min_value=-10000,
         max_value=10000,
         multiplier=0.01,
         step=0.1,
         unit=UnitOfTemperature.CELSIUS,
         cluster_id=ThirdRealitySoilMoistureCluster.cluster_id,
-        translation_key="temperature_correction_celsius",
-        fallback_name="Celsius correction",
+        translation_key="temperature_offset",
+        fallback_name="Temperature offset",
     )
     .number(
-        attribute_name=ThirdRealitySoilMoistureCluster.AttributeDefs.temperature_correction_fahrenheit.name,
-        min_value=-10000,
-        max_value=10000,
-        multiplier=0.01,
-        step=0.1,
-        unit=UnitOfTemperature.FAHRENHEIT,
-        cluster_id=ThirdRealitySoilMoistureCluster.cluster_id,
-        translation_key="temperature_correction_fahrenheit",
-        fallback_name="Fahrenheit correction",
-    )
-    .number(
-        attribute_name=ThirdRealitySoilMoistureCluster.AttributeDefs.humidity_correction.name,
+        attribute_name=ThirdRealitySoilMoistureCluster.AttributeDefs.humidity_offset.name,
         min_value=-10000,
         max_value=10000,
         multiplier=0.01,
         step=0.1,
         unit=PERCENTAGE,
         cluster_id=ThirdRealitySoilMoistureCluster.cluster_id,
-        translation_key="humidity_correction",
-        fallback_name="Humidity correction",
+        translation_key="humidity_offset",
+        fallback_name="Humidity offset",
     )
     .add_to_registry()
 )
