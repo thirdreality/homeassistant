@@ -35,17 +35,43 @@ class ThirdRealityRadarCluster(CustomCluster):
             is_manufacturer_specific=True,
         )
 
-        sensor_sensitivity: Final = ZCLAttributeDef(
+        presence_sensor_detect_distance_level: Final = ZCLAttributeDef(
             id=0xF002,
             type=t.uint8_t,
             is_manufacturer_specific=True,
         )
 
-        air_threshold: Final = ZCLAttributeDef(
+        tvoc_alert_threshold: Final = ZCLAttributeDef(
             id=0xF003,
             type=t.uint16_t,
             is_manufacturer_specific=True,
         )
+        
+        motion_detect_sensitivity_level: Final = ZCLAttributeDef(
+            id=0xF004,
+            type=t.uint8_t,
+            is_manufacturer_specific=True,
+        )
+        
+        presence_detect_sensitivity_level: Final = ZCLAttributeDef(
+            id=0xF005,
+            type=t.uint8_t,
+            is_manufacturer_specific=True,
+        )
+        
+        presence_hold_time_level: Final = ZCLAttributeDef(
+            id=0xF006,
+            type=t.uint8_t,
+            is_manufacturer_specific=True,
+        )
+        
+        tvoc_alert_enable: Final = ZCLAttributeDef(
+            id=0xF007,
+            type=t.uint8_t,
+            is_manufacturer_specific=True,
+        )
+        
+        
 
 
 (
@@ -64,28 +90,63 @@ class ThirdRealityRadarCluster(CustomCluster):
         cluster_id=ThirdRealityRadarCluster.cluster_id,
         attribute_name=ThirdRealityRadarCluster.AttributeDefs.tvoc_sensor_calibration.name,
         attribute_value=0x01,
-        translation_key="calibrate_tvoc_sensor",
-        fallback_name="Calibrate TVOC sensor",
+        translation_key="calibrate_tvoc_sensor_calibration",
+        fallback_name="Calibrate TVOC sensor calibration",
     )
     .number(
-        attribute_name=ThirdRealityRadarCluster.AttributeDefs.sensor_sensitivity.name,
+        attribute_name=ThirdRealityRadarCluster.AttributeDefs.presence_sensor_detect_distance_level.name,
         min_value=1,
         max_value=6,
         step=1,
         cluster_id=ThirdRealityRadarCluster.cluster_id,
-        translation_key="presence_sensor_sensitivity",
-        fallback_name="Presence sensor sensitivity",
+        translation_key="presence_sensor_detect_distance_level",
+        fallback_name="Presence sensor detect distance level",
     )
     .number(
-        attribute_name=ThirdRealityRadarCluster.AttributeDefs.air_threshold.name,
+        attribute_name=ThirdRealityRadarCluster.AttributeDefs.tvoc_alert_threshold.name,
         cluster_id=ThirdRealityRadarCluster.cluster_id,
         min_value=3000,
         max_value=50000,
         step=1,
         device_class=NumberDeviceClass.VOLATILE_ORGANIC_COMPOUNDS_PARTS,
         unit=CONCENTRATION_PARTS_PER_BILLION,
-        translation_key="air_threshold",
-        fallback_name="Air threshold",
+        translation_key="tvoc_alert_threshold",
+        fallback_name="TVOC alert threshold",
+    )
+    .number(
+        attribute_name=ThirdRealityRadarCluster.AttributeDefs.motion_detect_sensitivity_level.name,
+        cluster_id=ThirdRealityRadarCluster.cluster_id,
+        min_value=0,
+        max_value=20,
+        step=1,
+        translation_key="motion_detect_sensitivity_level",
+        fallback_name="Motion detect sensitivity level",
+    )
+    .number(
+        attribute_name=ThirdRealityRadarCluster.AttributeDefs.presence_detect_sensitivity_level.name,
+        cluster_id=ThirdRealityRadarCluster.cluster_id,
+        min_value=0,
+        max_value=20,
+        step=1,
+        translation_key="presence_detect_sensitivity_level",
+        fallback_name="Presence detect sensitivity level",
+    )
+    .number(
+        attribute_name=ThirdRealityRadarCluster.AttributeDefs.presence_hold_time_level.name,
+        cluster_id=ThirdRealityRadarCluster.cluster_id,
+        min_value=1,
+        max_value=4,
+        step=1,
+        translation_key="presence_hold_time_level",
+        fallback_name="Presence hold time level",
+    )
+    .switch(
+        attribute_name=ThirdRealityRadarCluster.AttributeDefs.tvoc_alert_enable.name,
+        cluster_id=ThirdRealityRadarCluster.cluster_id,
+        force_inverted=False,
+        translation_key="tvoc_alert_enable",
+        fallback_name="TVOC alert enable",
+        
     )
     .add_to_registry()
 )
