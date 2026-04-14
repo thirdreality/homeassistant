@@ -108,6 +108,7 @@ export default {
     }),
     m.light({
       color: { modes: ["xy"], enhancedHue: true },
+      colorTemp: { range: [154, 500] },
     }),
   ],
 };
