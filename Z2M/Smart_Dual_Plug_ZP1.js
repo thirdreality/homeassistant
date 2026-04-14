@@ -1,18 +1,6 @@
-const {} = require('zigbee-herdsman-converters/lib/modernExtend');
-// Add the lines below
-const fz = require('zigbee-herdsman-converters/converters/fromZigbee');
-const tz = require('zigbee-herdsman-converters/converters/toZigbee');
-const exposes = require('zigbee-herdsman-converters/lib/exposes');
-const reporting = require('zigbee-herdsman-converters/lib/reporting');
-const ota = require('zigbee-herdsman-converters/lib/ota');
-const utils = require('zigbee-herdsman-converters/lib/utils');
-const globalStore = require('zigbee-herdsman-converters/lib/store');
-const e = exposes.presets;
-const ea = exposes.access;
-const {deviceAddCustomCluster} = require('zigbee-herdsman-converters/lib/modernExtend');
-const m = require('zigbee-herdsman-converters/lib/modernExtend');
+import * as m from 'zigbee-herdsman-converters/lib/modernExtend';
 
-module.exports = [{
+export default{
     zigbeeModel: ['3RDP01072Z', '3RWP01073Z'],
     model: '3RDP01072Z',
     vendor: 'Third Reality',
@@ -22,21 +10,103 @@ module.exports = [{
 		{vendor: 'Third Reality', model: '3RWP01073Z', description: 'Smart Wall Plug ZW1', fingerprint: [{modelID: '3RWP01073Z'}]},
 	],
 	extend: [
-		m.deviceEndpoints({endpoints: {left: 1, right: 2}}),
-		m.onOff({endpointNames: ["left", "right"]}),
-		m.electricityMeter({acFrequency: false, powerFactor: true, endpointNames: ["left", "right"], energy: {divisor: 1000, multiplier: 1}}),
-		m.deviceAddCustomCluster('3rPlugSpecialCluster', {
-            ID: 0xFF03,
+		m.deviceEndpoints({endpoints: {1: 1, 2: 2}}),
+		m.onOff({endpointNames: ["1"], description: "On/off state of the switch left/bottom"}),
+        m.electricityMeter({acFrequency: false, powerFactor: true, endpointNames: ["1"], energy: {divisor: 1000, multiplier: 1}}),
+        m.onOff({endpointNames: ["2"], description: "On/off state of the switch right/top"}),
+        m.electricityMeter({acFrequency: false, powerFactor: true, endpointNames: ["2"], energy: {divisor: 1000, multiplier: 1}}),
+		m.deviceAddCustomCluster("3rDualPlugSpecialcluster", {
+            name: "3rDualPlugSpecialcluster",
+            ID: 0xff03,
             manufacturerCode: 0x1407,
             attributes: {
-                resetSummationDelivered: {ID: 0x0000, type: 0x20},
-				onToOffDelay: {ID: 0x0001, type: 0x21},
-				offToOnDelay: {ID: 0x0002, type: 0x21},
-				allowBind: {ID: 0x0020  , type: 0x20},
-                //off_to_on_delay: {ID: 0x0002, type: 0x21},
+                resetTotalEnergy: {name: "resetTotalEnergy", ID: 0x0000, type: 0x20, write: true, max: 0xff},
+                countdownToTurnOff: {name: "countdownToTurnOff", ID: 0x0001, type: 0x21, write: true, max: 0xffff},
+                countdownToTurnOn: {name: "countdownToTurnOn", ID: 0x0002, type: 0x21, write: true, max: 0xffff},
             },
             commands: {},
             commandsResponse: {},
         }),
+        m.deviceAddCustomCluster("genBasic", {
+            name: "genBasic",
+            ID: 0,
+            attributes: {
+                redLedBrightness: {name: "redLedBrightness", ID: 0xff01, type: 0x20, write: true, min: 0, max: 100},
+            },
+            commands: {},
+            commandsResponse: {},
+        }),
+        m.enumLookup({
+            endpointName: "1",
+            name: "reset_total_energy",
+            lookup: {Reset: 1},
+            cluster: "3rDualPlugSpecialcluster",
+            attribute: "resetTotalEnergy",
+            description: "Reset the sum of consumed energy",
+            access: "ALL",
+        }),
+        m.numeric({
+            name: "countdown_to_turn_off",
+            endpointNames: ["1"],
+            unit: "s",
+            valueMin: 0,
+            valueMax: 60000,
+            cluster: "3rDualPlugSpecialcluster",
+            attribute: "countdownToTurnOff",
+            description: "(ON-OFF)",
+            access: "ALL",
+        }),
+        m.numeric({
+            name: "countdown_to_turn_on",
+            endpointNames: ["1"],
+            unit: "s",
+            valueMin: 0,
+            valueMax: 60000,
+            cluster: "3rDualPlugSpecialcluster",
+            attribute: "countdownToTurnOn",
+            description: "(OFF-ON)",
+            access: "ALL",
+        }),
+        m.enumLookup({
+            endpointName: "2",
+            name: "reset_total_energy",
+            lookup: {Reset: 1},
+            cluster: "3rDualPlugSpecialcluster",
+            attribute: "resetTotalEnergy",
+            description: "Reset the sum of consumed energy",
+            access: "ALL",
+        }),
+        m.numeric({
+            name: "countdown_to_turn_off",
+            endpointNames: ["2"],
+            unit: "s",
+            valueMin: 0,
+            valueMax: 60000,
+            cluster: "3rDualPlugSpecialcluster",
+            attribute: "countdownToTurnOff",
+            description: "(ON-OFF)",
+            access: "ALL",
+        }),
+        m.numeric({
+            name: "countdown_to_turn_on",
+            endpointNames: ["2"],
+            unit: "s",
+            valueMin: 0,
+            valueMax: 60000,
+            cluster: "3rDualPlugSpecialcluster",
+            attribute: "countdownToTurnOn",
+            description: "(OFF-ON)",
+            access: "ALL",
+        }),
+        m.numeric({
+            name: "red_led_brightness",
+            unit: "%",
+            valueMin: 0,
+            valueMax: 100,
+            cluster: "genBasic",
+            attribute: "redLedBrightness",
+            description: "Set red led brightness",
+            access: "ALL",
+        }),
 	],
-}, ];
+};
