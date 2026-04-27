@@ -29,8 +29,9 @@
 
 ![config_configuration](assets/motion/20.png)
 
-4）Enter configuration.yaml, add these two lines, and the path will be the location where you store the script, as shown in the above figure 
-```enable_quirks: true```    
+4）Enter configuration.yaml, add these two lines, and the path will be the location where you store the script, as shown in the above figure
+ 
+```enable_quirks: true```   
 ```custom_quirks_path: /config/custom_zha_quirks```
 
 ![config_configuration](assets/motion/22.png)
