@@ -17,9 +17,9 @@ class ThirdRealityRadarCluster(CustomCluster):
         """Define the attributes of a private cluster."""
 
         voc_Index: Final = ZCLAttributeDef(
-            id=0x0000,
+            id=0x0100,
             type=t.Single,
-            is_manufacturer_specific=True,
+            manufacturer_code=0x1407,
         )
 
 (
@@ -29,9 +29,9 @@ class ThirdRealityRadarCluster(CustomCluster):
         endpoint_id=1,
         attribute_name=ThirdRealityRadarCluster.AttributeDefs.voc_Index.name,
         cluster_id=ThirdRealityRadarCluster.cluster_id,
-        device_class=SensorDeviceClass.VOLATILE_ORGANIC_COMPOUNDS,
+        unit=" ",
+        device_class=SensorDeviceClass.AQI,
         state_class=SensorStateClass.MEASUREMENT,
-        unit="aqi",
         translation_key="voc_index",
         fallback_name="Voc index",
     )
