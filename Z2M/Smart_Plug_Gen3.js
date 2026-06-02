@@ -36,7 +36,7 @@ export default {
             name: "genBasic",
             ID: Zcl.Clusters.genBasic.ID,
             attributes: {
-                ledBrightness: {name: "ledBrightness", ID: 0xFF01, type: Zcl.DataType.UINT8, write: true, max: 0x64},
+                ledBrightness: {name: "ledBrightness", ID: 0xFF01, type: Zcl.DataType.UINT8, manufacturerCode: 0x1407, write: true, max: 0x64},
             },
             commands: {},
             commandsResponse: {},
