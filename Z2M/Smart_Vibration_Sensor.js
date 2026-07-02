@@ -39,9 +39,9 @@ export default {
     model: '3RVS01031Z',
     vendor: 'Third Reality',
     description: 'Zigbee vibration sensor',
-    fromZigbee: [fzLocal.thirdreality_acceleration, fz.ias_vibration_alarm_1],
+    // fromZigbee: [fzLocal.thirdreality_acceleration, fz.ias_vibration_alarm_1],
     ota: true,
-    exposes: [e.vibration()],
+    // exposes: [e.vibration()],
 	extend: [
 		m.deviceAddCustomCluster('THIRD_REALITY_VIBRATE_DELAY_CLUSTER_ID', {
 			name: "THIRD_REALITY_VIBRATE_DELAY_CLUSTER_ID",
@@ -60,11 +60,10 @@ export default {
 			commandsResponse: {},
 		}),
 		m.battery(),
-		// m.iasZoneAlarm({
-		// 	zoneType: "generic",
-		// 	zoneAttributes: ["alarm_1"],
-		// 	description: "Being in vibration",
-		// }),
+		m.iasZoneAlarm({
+			zoneType: "vibration",
+			zoneAttributes: ["alarm_1"],
+		}),
 		m.numeric({
 			name: "cool_down_time",
 			unit: "s",
