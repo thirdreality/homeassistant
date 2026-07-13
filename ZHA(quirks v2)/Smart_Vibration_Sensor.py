@@ -24,26 +24,26 @@ class ThirdRealityVibrationSensorCluster(CustomCluster):
             id=0x0001,
             type=t.int16s,
             access="rp",
-            is_manufacturer_specific=False,
+            manufacturer_code=None,
         )
         y_acceleration: Final = ZCLAttributeDef(
             id=0x0002,
             type=t.int16s,
             access="rp",
-            is_manufacturer_specific=False,
+            manufacturer_code=None,
         )
         z_acceleration: Final = ZCLAttributeDef(
             id=0x0003,
             type=t.int16s,
             access="rp",
-            is_manufacturer_specific=False,
+            manufacturer_code=None,
         )
         # Cool-down / debounce time for the motion detection (writable).
         cool_down_time: Final = ZCLAttributeDef(
             id=0x0004,
             type=t.uint16_t,
             access="rwp",
-            is_manufacturer_specific=False,
+            manufacturer_code=None,
         )
 
 
