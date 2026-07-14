@@ -54,7 +54,7 @@ class ThirdRealityVibrationSensorCluster(CustomCluster):
         attribute_name=ThirdRealityVibrationSensorCluster.AttributeDefs.cool_down_time.name,
         cluster_id=ThirdRealityVibrationSensorCluster.cluster_id,
         min_value=0,
-        max_value=3600,
+        max_value=7200,
         unit=UnitOfTime.SECONDS,
         device_class=NumberDeviceClass.DURATION,
         translation_key="cool_down_time",
