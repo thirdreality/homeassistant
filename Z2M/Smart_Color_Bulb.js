@@ -11,7 +11,7 @@ export default {
 	],
     ota: true,
     extend: [
-		m.light({colorTemp: {range: [154, 454]}, color: {modes: ["xy", "hs"], enhancedHue: false}}),
+		m.light({colorTemp: {range: [142, 454]}, color: {modes: ["xy", "hs"], enhancedHue: false}}),
         m.deviceAddCustomCluster("3rColorSpecialCluster", {
             name: "3rColorSpecialCluster",
             ID: 0xff04,
