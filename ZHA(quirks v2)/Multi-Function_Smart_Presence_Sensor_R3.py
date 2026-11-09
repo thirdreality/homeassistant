@@ -1,7 +1,7 @@
 """Third Reality 60G radar devices."""
+
 from typing import Final
-from zhaquirks.clusters import CustomCluster
-from zhaquirks.builder import QuirkBuilder
+
 from zha.application.platforms.number.device_class import NumberDeviceClass
 from zha.application.platforms.sensor.device_class import (
     SensorDeviceClass,
@@ -12,13 +12,18 @@ import zigpy.types as t
 from zigpy.zcl.clusters.measurement import OccupancySensing
 from zigpy.zcl.foundation import BaseAttributeDefs, ZCLAttributeDef
 
+from zhaquirks.builder import QuirkBuilder
+from zhaquirks.clusters import CustomCluster
+
 
 class ThirdRealityRadarCluster(CustomCluster):
     """Third Reality's 60G radar private cluster."""
+
     cluster_id = 0x042E
 
     class AttributeDefs(BaseAttributeDefs):
         """Define the attributes of a private cluster."""
+
         # measure the value of voc
         volatile_organic_compounds: Final = ZCLAttributeDef(
             id=0x0000,
@@ -35,7 +40,7 @@ class ThirdRealityRadarCluster(CustomCluster):
             type=t.uint8_t,
             is_manufacturer_specific=True,
         )
-        tvoc_alert_threshold: Final = ZCLAttributeDef(
+        air_threshold: Final = ZCLAttributeDef(
             id=0xF003,
             type=t.uint16_t,
             is_manufacturer_specific=True,
@@ -68,8 +73,9 @@ class ThirdRealityRadarCluster(CustomCluster):
     .prevent_default_entity_creation(
         endpoint_id=1,
         cluster_id=OccupancySensing.cluster_id,
-        function=lambda entity: entity.translation_key
-        in ("pir_o_to_u_delay", "pir_u_to_o_delay"),
+        function=lambda entity: (
+            entity.translation_key in ("pir_o_to_u_delay", "pir_u_to_o_delay")
+        ),
     )
     .sensor(
         attribute_name=ThirdRealityRadarCluster.AttributeDefs.volatile_organic_compounds.name,
@@ -97,7 +103,7 @@ class ThirdRealityRadarCluster(CustomCluster):
         fallback_name="Presence sensor detect distance level",
     )
     .number(
-        attribute_name=ThirdRealityRadarCluster.AttributeDefs.tvoc_alert_threshold.name,
+        attribute_name=ThirdRealityRadarCluster.AttributeDefs.air_threshold.name,
         cluster_id=ThirdRealityRadarCluster.cluster_id,
         min_value=3000,
         max_value=50000,
